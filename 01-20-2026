@@ -1,0 +1,78 @@
+Types of Data
+We first learned that data can be categorized into three main types:
+•	Structured Data – Data stored in a fixed format with rows and columns (e.g., tables in SQL)
+•	Semi-Structured Data – Data with some structure but not strictly tabular (e.g., JSON, XML)
+•	Unstructured Data – Data with no predefined format (e.g., images, videos, text files)
+Based on these data types, we discussed how different databases are designed.
+Relational vs Non-Relational Databases
+•	Relational Databases store structured data in tables and use SQL (e.g., MySQL)
+•	Non-Relational (NoSQL) Databases handle semi-structured or unstructured data
+We also learned that databases are stored on servers, not on our local system directly.
+DBMS and SQL
+•	A DBMS (Database Management System) is used to connect to and manage database servers.
+•	SQL (Structured Query Language) is the language used to communicate with databases.
+We understood the logical flow of how data is organized:
+Workbench → Server → Database → Schema → Tables → Columns & Rows
+SQL Command Categories
+We learned that SQL commands are grouped into different categories based on their purpose:
+Category	Purpose
+DDL (Data Definition Language)	Defines database structure
+DML (Data Manipulation Language)	Inserts, updates, deletes data
+DQL (Data Query Language)	Retrieves data
+DCL (Data Control Language)	Controls permissions
+TCL (Transaction Control Language)	Manages transactions
+
+DDL Commands (Structure Creation & Modification)
+We practiced DDL commands to create and modify databases and tables.
+Creating a Database
+CREATE DATABASE company_db;
+Creating a Table
+CREATE TABLE company_db.test_table  (id INT, name VARCHAR(100));
+Viewing Data (DQL)
+SELECT * FROM company_db.test_table;
+Inserting Data (DML)
+We inserted records into the table using:
+INSERT INTO company_db.test_table (id, name)
+VALUES
+(1, 'alice'),
+(2, 'welborn'),
+(3, 'heop');
+Altering Tables
+We learned how to modify existing tables:
+•	Adding a new column
+•	Renaming a column
+ALTER TABLE company_db.test_table
+ADD email VARCHAR(255);
+ALTER TABLE company_db.test_table
+RENAME COLUMN email TO email_id;
+Dropping Tables
+We discussed how to safely delete tables:
+DROP TABLE IF EXISTS company_db.persons;
+
+Primary Key and Foreign Key Concepts
+We learned that:
+•	A Primary Key uniquely identifies each record in a table
+•	A Foreign Key creates a relationship between two tables
+Important Clarification (Doubt Resolved)
+•	Foreign keys can only be implemented at the table level
+•	A primary key from another database cannot be referenced
+•	Foreign key relationships must exist within the same database
+Foreign Key Constraints
+We discussed special keywords used with foreign keys:
+RESTRICT
+•	Prevents deleting a parent record if it is referenced in a child table
+CASCADE
+•	Automatically updates or deletes related records in child tables
+•	Example: Updating a phone number everywhere it is referenced
+Other Important Constraints
+•	DEFAULT – Assigns a default value if no value is provided
+•	CHECK – Ensures data follows a condition
+Example:
+Age INT CHECK (Age > 18)
+DROP vs DELETE vs TRUNCATE
+We clearly understood the difference:
+•	DROP – Deletes the entire table (structure + data)
+•	DELETE – Deletes specific rows using a WHERE condition
+•	TRUNCATE – Deletes all rows quickly but keeps the table structure
+Our homework is to practice Create, Read, and Update (CRUD) operations on our local MySQL database server.
+We were specifically instructed not to modify any tables in the Sakila database.
