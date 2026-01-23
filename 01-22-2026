@@ -1,0 +1,97 @@
+SQL Querying & Data Profiling
+In today’s class, we focused on querying data using SQL and learned how to filter, sort, count, and analyze records using different SQL keywords. The session mainly covered data profiling techniques using SELECT, WHERE, and conditional operators.
+DISTINCT and COUNT
+We first learned how to identify unique records using the DISTINCT keyword. This is especially useful when we want to remove duplicate values while querying.
+•	COUNT(DISTINCT column) → Counts only unique values
+•	COUNT(column) → Counts all non-null values (including duplicates)
+Example:
+SELECT COUNT(DISTINCT title) FROM sakila.film;
+SELECT COUNT(title) FROM sakila.film;
+This helped us understand how duplicate records affect analysis.
+LIMIT Keyword
+The LIMIT keyword is used to restrict the number of rows returned by a query. This is helpful when working with large datasets.
+Example:
+SELECT first_name, last_name 
+FROM sakila.film 
+LIMIT 50;
+Filtering Data Using WHERE Clause
+We practiced filtering data using conditions with WHERE.
+AND Condition
+Returns records only when all conditions are true.
+SELECT * FROM sakila.film
+WHERE rating = 'R' AND length >= 91;
+OR Condition
+Returns records when at least one condition is true.
+SELECT * FROM sakila.film
+WHERE rating = 'PG' OR rental_duration = 4
+ORDER BY rental_rate ASC;
+Sorting Results with ORDER BY
+We learned how to sort results using ORDER BY:
+•	ASC → Ascending order
+•	DESC → Descending order
+Example:
+SELECT * FROM sakila.film
+ORDER BY rental_rate DESC;
+NOT Conditions
+We explored multiple ways to represent NOT equal conditions in SQL:
+WHERE NOT rental_duration = 4;
+WHERE rental_duration != 4;
+WHERE rental_duration <> 4;
+All three queries return records where rental_duration is not equal to 4.
+Wildcard Characters and LIKE
+We learned about wildcards, which help in pattern matching similar to regular expressions.
+Wildcards Used:
+•	% → Matches zero or more characters
+•	→ Matches exactly one character
+Example 1:
+SELECT city 
+FROM sakila.city 
+WHERE city LIKE 'A%S';
+This finds cities that start with A and end with S, with any characters in between.
+Example 2: 
+SELECT city 
+FROM sakila.city 
+WHERE city LIKE '_S___D%';
+This finds cities that follow a specific character pattern, combining known and unknown characters.
+Handling NULL Values
+We learned that NULL represents missing or unknown values and cannot be compared using =.
+To find NULL values, we use IS NULL.
+Example:
+SELECT rental_id, inventory_id, customer_id, return_date
+FROM sakila.rental
+WHERE return_date IS NULL;
+This helps identify customers who have not yet returned rented items.
+BETWEEN Keyword
+The BETWEEN keyword is used to filter values within a range (inclusive).
+Example:
+SELECT rental_id, inventory_id, customer_id, return_date
+FROM sakila.rental
+WHERE return_date BETWEEN '2005-09-22' AND '2005-08-12';
+This helps in date-based and numeric range filtering.
+GROUP BY and HAVING
+We learned how to perform aggregation and grouping.
+•	GROUP BY groups rows based on a column
+•	HAVING filters aggregated results
+•	HAVING cannot be used without GROUP BY
+Example:
+SELECT customer_id, COUNT(*) AS count
+FROM sakila.rental
+GROUP BY customer_id
+HAVING COUNT(*) <= 30
+ORDER BY count DESC;
+This query helps identify customers with 30 or fewer rentals.
+COUNT(*) Explained
+•	COUNT(*) counts the total number of rows
+•	It typically represents the number of records based on the primary key
+SQL Query Execution Order (Very Important)
+We learned that SQL executes queries in the following order (not the way we write it):
+FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+Understanding this helps avoid logical mistakes in complex queries.
+Today’s class helped me understand how to profile and analyze data using SQL. I learned how to filter data using conditions, identify unique values, work with NULLs, use pattern matching with wildcards, and summarize data using GROUP BY and HAVING. Understanding the execution order of SQL queries gave me clarity on how SQL processes data internally, which will help me write more efficient and accurate queries.
+
+
+
+
+
+
+
